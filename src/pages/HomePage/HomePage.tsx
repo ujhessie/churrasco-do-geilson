@@ -1,23 +1,20 @@
+// src/pages/HomePage.tsx
 import { useMenu } from "../../contexts/MenuContext";
+import { CardProduct } from "../../components/CardProduct/CardProduct";
 
 export const HomePage = () => {
-
-  const { menu } = useMenu(); // Pegando o menu com nosso hook
+  const { menu } = useMenu();
 
   return (
-    <>
-      <h1>Página Inicial </h1>
+    <div style={{ padding: "1rem" }}>
+      <h1>Página Inicial</h1>
       <p>Cardápio Digital responsivo</p>
 
-        <ul>
+      <div style={{ display: "grid", gap: "1rem" }}>
         {menu.map((item, index) => (
-          <li key={index} style={{ marginBottom: "1rem" }}>
-            <strong>{item.Título}</strong> — R${item.Valor}<br />
-            <small>{item.Descrição}</small><br />
-            <em>{item.Categoria}</em>
-          </li>
+          <CardProduct key={index} product={item} />
         ))}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 };
