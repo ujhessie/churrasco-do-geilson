@@ -1,11 +1,13 @@
-import { Contexts } from "./contexts/Contexts";
-import { MyRoutes } from "./routes/Routes";
+
+import { MyRoutes } from "./routes/MyRoutes";
 
 function App() {
   return (
-    <Contexts>
-      <MyRoutes />
-    </Contexts>
+    <>
+    
+          <MyRoutes />
+
+    </>
   );
 }
 
