@@ -1,3 +1,6 @@
+import { CircleUser, Grip, House, ShoppingCart } from "lucide-react";
+import { useState } from "react";
+
 interface iProdutos {
   nome: string;
   descricao?: string;
@@ -70,6 +73,18 @@ const produtos: iProdutos[] = [
   },
 ];
 
+const SecBanners = () => {
+  return (
+    <div className="banners banner  bg-orange-500 aspect-[4/3] shadow-md text-gray-400 p-8  bg-[url('/images/capa.png')] bg-cover">
+      <header className="flex justify-end">
+        <div className="icon-menu p-2 bg-white rounded-xl shadow-2xl">
+          <Grip className="text-black w-[30px] h-[30px]" />
+        </div>
+      </header>
+    </div>
+  );
+};
+
 const CardProduto = ({ produto }: { produto: iProdutos }) => {
   return (
     <div className="card-produto shadow rounded-2xl overflow-clip flex">
@@ -118,42 +133,29 @@ const Categoria = ({
   return (
     <a
       href={href}
-      className="tag gap-2 items-center p-1 bg-gray-100 rounded-full inline-flex hover:bg-gray-200 transition-colors"
+      className="tag gap-2 items-center p-1 text-gray-600 bg-gray-100 rounded-full   hover:bg-orange-400 hover:text-white shadow- transition-colors flex "
     >
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcIhglanMSJ4RxCCYcW_a8_aKlGMw2iQ9vw&s"
-        alt={categoria}
-        className="w-[35px] aspect-square object-cover rounded-full"
-      />
-      <span className="text-gray-600 text-[14px] font-medium mr-3">
+      <div className="w-[50px] border-4 border-white aspect-square  rounded-full overflow-clip ">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcIhglanMSJ4RxCCYcW_a8_aKlGMw2iQ9vw&s"
+          alt={categoria}
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <p className=" text-[14px] font-bold inline-block text-nowrap mr-4">
         {categoria}
-      </span>
+      </p>
     </a>
   );
 };
-
-export const HomePage = () => {
+const SecMain = () => {
   return (
     <>
-      <div className="banners p-2">
-        <div className="banner bg-orange-500 aspect-[4/3] shadow rounded-3xl text-white p-8 flex flex-col justify-end">
-          <h2 className="font-bold text-3xl">Estamos de cara nova</h2>
-          <p className="mb-4">
-            Venha aproveitar nossas promoções com 0% de cashback
-          </p>
-          <div>
-            <a
-              href="#churrascos"
-              className="cta bg-white text-gray-800 font-normal text-xl rounded-full py-2 px-6 inline-block shadow"
-            >
-              Pedir agora
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="categorias p-4 ">
-        <h2 className="text-2xl font-medium text-gray-600 mb-4">Categorias</h2>
-        <div className="tags-categorias flex gap-2 flex-wrap  px-4 ">
+      <div className="categorias px-4 py-8">
+        <h2 className="text-2xl font-medium  text-gray-600 mb-4 ">
+          Categorias
+        </h2>
+        <div className="tags-categorias flex gap-2 w-full   overflow-x-auto">
           <Categoria categoria="Churrascos" href="#churrascos" />
           <Categoria categoria="Espetos" href="#espetos" />
           <Categoria categoria="Bebidas" href="#bebidas" />
@@ -214,6 +216,63 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
+    </>
+  );
+};
+
+const Navigation = () => {
+  const [active, setActive] = useState("home");
+
+  const NavItem = ({ icon: Icon, label, value }: {
+    icon: React.ElementType;
+    label: string;
+    value: string;
+  }) => {
+    const isActive = active === value;
+
+    return (
+      <button
+        onClick={() => setActive(value)}
+        className={`rounded-full px-4 py-3 flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out
+          ${isActive ? "bg-orange-600" : "bg-gray-700"}`}
+      >
+        <Icon className="text-gray-100 shrink-0" />
+        <span
+          className={`text-gray-100 font-bold text-nowrap transition-all duration-300 ease-in-out overflow-hidden block
+            ${isActive ? "max-w-[200px] opacity-100 ml-1" : "max-w-0 opacity-0 ml-0 hidden"}`}
+        >
+          {label}
+        </span>
+      </button>
+    );
+  };
+
+  return (
+    <div className="p-4 sticky left-0 bottom-0 text-white z-10 w-full">
+      <div className="p-4 bg-gray-800 rounded-full flex justify-between gap-4 mx-auto w-min">
+
+        <NavItem icon={House} label="Início" value="home" />
+        <NavItem icon={ShoppingCart} label="Carrinho" value="cart" />
+        <NavItem icon={CircleUser} label="Minha Conta" value="account" />
+
+      </div>
+    </div>
+  );
+};
+
+export const HomePage = () => {
+  return (
+    <>
+      <div className="relative">
+        <section className="-mb-8 sticky top-0">
+          <SecBanners />
+        </section>
+        <section className=" sticky top-0 bg-white rounded-t-4xl">
+          <SecMain />
+        </section>
+      </div>
+
+      <Navigation />
     </>
   );
 };
