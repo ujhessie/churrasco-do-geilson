@@ -34,10 +34,10 @@ export const SecProdutos = () => {
             <h2 className="text-2xl font-medium text-gray-600 mb-4">
               {categoria.nome}
             </h2>
-            <div className=" gap-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 grid-auto-rows: 1fr">
+            <div className="flex flex-col gap-2">
               {produtosDaCategoria.map((produto) => (
                 <CardProduto
-                  tipo="secundario"
+                  tipo="primario"
                   key={produto.id}
                   id={produto.id}
                 />

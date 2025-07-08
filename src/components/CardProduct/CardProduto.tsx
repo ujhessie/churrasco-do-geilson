@@ -22,7 +22,7 @@ export const CardProduto = ({
   // 3. Componente do título
   const Titulo = () => {
     return (
-      <h4 className="text-gray-600 font-bold text-[20px] leading-[100%] mb-2">
+      <h4 className="text-gray-600 font-bold text-[16px] leading-[100%] mb-2">
         {produto.nome}
       </h4>
     );
@@ -44,7 +44,7 @@ export const CardProduto = ({
 
   const Desc = () => {
     return (
-      <p className="line-clamp-2 overflow-hidden w-full leading-[105%] text-gray-500 text-[16px]  mb-3">
+      <p className="line-clamp-2 overflow-hidden w-full leading-[105%] text-gray-500 text-[12px]  mb-3">
         {produto.descricao}
       </p>
     );
@@ -52,7 +52,7 @@ export const CardProduto = ({
 
   const Valor = () => {
     return (
-      <p className=" font-bold inline-block text-[16px] text-gray-600">
+      <p className=" font-bold inline-block text-[14px] text-gray-600">
         R$ {produto.valor?.toFixed(2)}
       </p>
     );
@@ -61,9 +61,9 @@ export const CardProduto = ({
 const AddButton = () => {
   return (
     <div className="group flex items-center gap-4 p-2 font-medium text-orange-400 text-nowrap hover:bg-orange-500 bg-orange-100 hover:text-white rounded-full transition cursor-pointer">
-      <p className="ml-2">Pedir Agora</p>
+      <p className="ml-2 text-[14px]">Pedir Agora</p>
       <div className="text-orange-400 group-hover:text-white">
-        <FaWhatsapp className="w-5 h-5 transition-opacity opacity-80 group-hover:opacity-100" />
+        <FaWhatsapp className="w-4 h-4 transition-opacity opacity-80 group-hover:opacity-100" />
       </div>
     </div>
   );
@@ -71,15 +71,16 @@ const AddButton = () => {
 
 
   return tipo === "primario" ? (
-    <div className="card-produto shadow rounded-2xl overflow-clip flex">
-      <div className="div-img-produto max-w-[30%] w-full">
+    <div className="card-produto shadow rounded-md overflow-clip flex p-2">
+      <div className="div-img-produto max-w-[30%] w-full rounded-md">
         <Img />
       </div>
       <div className="div-info-produto p-4">
         <Titulo />
         <Desc />
-        <div>
+        <div className="flex justify-between items-center">
           <Valor />
+          <AddButton/>
         </div>
       </div>
     </div>
