@@ -1,26 +1,25 @@
 import { createContext } from "react";
 import { produtos, type IProduto } from "../Data/Produtos";
 
+// 1. Define a interface do contexto
 interface ProdutosContextData {
   produtos: IProduto[];
-  getProdutosPorCategoria: (categoria: string) => IProduto[];
 }
 
+// 2. Cria o contexto
 export const ProdutosContext = createContext<ProdutosContextData>(
   {} as ProdutosContextData
 );
 
-export const ProdutosProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const getProdutosPorCategoria = (categoria: string) => {
-    return produtos.filter((produto) => produto.categoria === categoria);
-  };
+// 3. Define as props do Provider
+interface ProdutosProviderProps {
+  children: React.ReactNode; // ReactNode permite colocar JSX como filhos
+}
 
+// 4. Cria o Provider
+export const ProdutosProvider = ({ children }: ProdutosProviderProps) => {
   return (
-    <ProdutosContext.Provider value={{ produtos, getProdutosPorCategoria }}>
+    <ProdutosContext.Provider value={{ produtos }}>
       {children}
     </ProdutosContext.Provider>
   );

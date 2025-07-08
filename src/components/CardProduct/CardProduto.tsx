@@ -1,39 +1,106 @@
-import type { IProduto } from "../../Data/Produtos";
+import { useContext } from "react";
+import { ProdutosContext } from "../../Contexts/ProductsContext";
+import { FaWhatsapp } from 'react-icons/fa';
 
-export const CardProduto = ({ produto }: { produto: IProduto }) => {
+export const CardProduto = ({
+  id,
+  tipo = "primario",
+}: {
+  id: number;
+  tipo?: "primario" | "secundario";
+}) => {
+  const { produtos } = useContext(ProdutosContext);
+
+  // 1. Buscar o produto pelo id
+  const produto = produtos.find((p) => p.id === id);
+
+  // 2. Se não encontrar o produto, mostrar uma mensagem de erro ou nada
+  if (!produto) {
+    return <p>Produto não encontrado</p>;
+  }
+
+  // 3. Componente do título
+  const Titulo = () => {
+    return (
+      <h4 className="text-gray-600 font-bold text-[20px] leading-[100%] mb-2">
+        {produto.nome}
+      </h4>
+    );
+  };
+
+  const Img = () => {
+    return (
+      <img
+        className="w-full h-full object-cover"
+        src={
+          produto.imgUrl
+            ? produto.imgUrl
+            : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcIhglanMSJ4RxCCYcW_a8_aKlGMw2iQ9vw&s"
+        }
+        alt={produto.nome}
+      />
+    );
+  };
+
+  const Desc = () => {
+    return (
+      <p className="line-clamp-2 overflow-hidden w-full leading-[105%] text-gray-500 text-[16px]  mb-3">
+        {produto.descricao}
+      </p>
+    );
+  };
+
+  const Valor = () => {
+    return (
+      <p className=" font-bold inline-block text-[16px] text-gray-600">
+        R$ {produto.valor?.toFixed(2)}
+      </p>
+    );
+  };
+
+const AddButton = () => {
   return (
+    <div className="group flex items-center gap-4 p-2 font-medium text-orange-400 text-nowrap hover:bg-orange-500 bg-orange-100 hover:text-white rounded-full transition cursor-pointer">
+      <p className="ml-2">Pedir Agora</p>
+      <div className="text-orange-400 group-hover:text-white">
+        <FaWhatsapp className="w-5 h-5 transition-opacity opacity-80 group-hover:opacity-100" />
+      </div>
+    </div>
+  );
+};
+
+
+  return tipo === "primario" ? (
     <div className="card-produto shadow rounded-2xl overflow-clip flex">
       <div className="div-img-produto max-w-[30%] w-full">
-        <img
-          className="w-full h-full object-cover"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcIhglanMSJ4RxCCYcW_a8_aKlGMw2iQ9vw&s"
-          alt={produto.nome}
-        />
+        <Img />
       </div>
-
       <div className="div-info-produto p-4">
-        <h4 className="text-gray-600 font-bold text-[18px] mb-1">
-          {produto.nome}
-        </h4>
-
-        {produto.categoria === "espeto" && (
-          <div className="tags-produto mb-2">
-            <span className="leading-[110%] text-red-400 text-[12px] font-medium bg-red-50 py-1 px-3 rounded-md inline-block">
-              Sem acompanhamento
-            </span>
-          </div>
-        )}
-
-        <p className="line-clamp-2 overflow-hidden w-full leading-[110%] text-gray-600 text-[14px] mb-3">
-          {produto.descricao}
-        </p>
-
+        <Titulo />
+        <Desc />
         <div>
-          <p className="text-orange-500 font-bold inline-block text-[16px]">
-            R$ {produto.valor?.toFixed(2)}
-          </p>
+          <Valor />
+        </div>
+      </div>
+    </div>
+  ) : (
+    // Aqui você pode adicionar o layout para o tipo "secundário"
+    <div className=" shadow flex flex-col rounded-xl p-4 overflow-clip relative h-full">
+      <div className="aspect-[4/3] rounded-xl overflow-hidden  ">
+        <Img />
+      </div>
+      <div className="flex flex-grow flex-col justify-between rounded-md   bg-white ">
+        <div className="mt-4">
+          <Titulo />
+          <Desc />
+        </div>
+        <div className="flex justify-between gap-4 items-center flex-grow ">
+          <Valor />
+          <AddButton />
         </div>
       </div>
     </div>
   );
+
+  // return tipo === "secundario" ? ():
 };
