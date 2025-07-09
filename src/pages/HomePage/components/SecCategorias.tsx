@@ -17,10 +17,10 @@ const Categoria = ({
       style={{
         backgroundImage: `url(${img})`,
       }}
-      className="tag relative gap-2 flex justify-center items-center rounded-xl overflow-clip flex-shrink-0  text-gray-600 h-full w-full bg-amber-500 bg-cover bg-center"
+      className="tag relative gap-2 flex justify-center items-center rounded-md overflow-clip flex-shrink-0  text-gray-600 h-full w-full bg-amber-500 bg-cover bg-center"
     >
       <div className="div-overlayer absolute top-0 left-0 w-full h-full bg-black/50"></div>
-      <p className="block text-gray-200 font-medium z-10 text-xl text-center">
+      <p className="block text-gray-200 font-medium z-10 text-[14px] text-center">
         {categoria}
       </p>
     </a>
@@ -30,8 +30,8 @@ const Categoria = ({
 export const SecCategorias = () => {
   return (
     <Swiper
-      spaceBetween={10}
-      slidesPerView={2.2}
+      spaceBetween={8}
+      slidesPerView={3.3}
       className="w-full"
     >
       <SwiperSlide className='aspect-[2.39/1]'>
