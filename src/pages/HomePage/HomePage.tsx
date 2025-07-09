@@ -19,11 +19,18 @@ export const HomePage = () => {
   return (
     <div className="relative overflow-visible scroll-smooth max-w-[1400px] mx-auto">
       <SecBanner />
-      <div className="sticky top-0 bg-white rounded-t-4xl">
-        <SecCategorias />
+      <main className="sticky top-0 bg-white rounded-t-xl pt-6 overflow-clip">
+        {/* <h2 className="text-2xl font-medium  text-gray-600  px-4">
+          Categorias
+        </h2> */}
+
+        <div className="  bg-white z-20  px-4 py-2 overflow-clip">
+          <SecCategorias />
+        </div>
+
         <SecProdutos />
         <Navigation />
-      </div>
+      </main>
     </div>
   );
 };

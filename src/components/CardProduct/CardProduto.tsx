@@ -63,19 +63,20 @@ export const CardProduto = ({
       <div className="group flex items-center gap-2 p-1  font-medium text-orange-400 text-nowrap hover:bg-orange-500 bg-orange-100 hover:text-white rounded-full transition cursor-pointer">
         <p className="ml-2 text-[14px]">Pedir Agora</p>
         <div className="text-orange-400 group-hover:text-white">
-          <FaWhatsapp className="w-4 h-4 transition-opacity opacity-80 group-hover:opacity-100" />
+          <FaWhatsapp className="w-4 h-4 transition-opacity opacity-80 group-hover:opacity-100 -z-10" />
         </div>
       </div>
     );
   };
 
   return tipo === "primario" ? (
-    <div className="card-produto shadow rounded-md overflow-clip flex gap-2 p-2">
+    <div className="card-produto shadow rounded-md overflow-clip flex gap-2 p-2 min-h-[100px]">
       <div className="div-img-produto max-w-[30%] w-full rounded-md">
         <Img />
       </div>
-      <div className="div-info-produto p-2 flex-grow">
-        <div>
+
+      <div className="div-info-produto p-2  flex flex-col grow">
+        <div className="grow">
           <Titulo />
           <Desc />
         </div>

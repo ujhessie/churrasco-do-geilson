@@ -8,7 +8,10 @@ html {
   box-sizing: border-box;
 }
 
-
 body {
-  background-color: #FFF3EA;
+  background-color: #fff3ea;
+}
+
+h2 {
+  @apply text-2xl font-medium text-gray-600 mb-2;
 }
