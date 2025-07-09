@@ -17,7 +17,7 @@ const Categoria = ({
       style={{
         backgroundImage: `url(${img})`,
       }}
-      className="tag relative gap-2 flex justify-center items-center rounded-xl overflow-clip flex-shrink-0 w-[40%] text-gray-600 h-full w-full bg-amber-500 bg-cover bg-center"
+      className="tag relative gap-2 flex justify-center items-center rounded-xl overflow-clip flex-shrink-0  text-gray-600 h-full w-full bg-amber-500 bg-cover bg-center"
     >
       <div className="div-overlayer absolute top-0 left-0 w-full h-full bg-black/50"></div>
       <p className="block text-gray-200 font-medium z-10 text-xl text-center">
