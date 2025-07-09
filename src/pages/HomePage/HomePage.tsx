@@ -24,7 +24,7 @@ export const HomePage = () => {
           Categorias
         </h2> */}
 
-        <div className="  bg-white z-20  px-4 py-2 overflow-clip sticky top-0">
+        <div className="  bg-white z-20  px-4 py-2 overflow-clip sticky top-1">
           <SecCategorias />
         </div>
 
