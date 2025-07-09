@@ -11,13 +11,25 @@ const Categoria = ({
   href: string;
   img?: string;
 }) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault(); // impede o comportamento padrão do link
+    const id = href.replace('/#', ''); // tira o "/#" e fica só com o id
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100; // define o quanto acima do elemento você quer parar (ex: -100px)
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <a
-      href={href}
+      onClick={handleClick}
       style={{
         backgroundImage: `url(${img})`,
       }}
-      className="tag relative gap-2 flex justify-center items-center rounded-md overflow-clip flex-shrink-0  text-gray-600 h-full w-full bg-amber-500 bg-cover bg-center"
+      className="tag cursor-pointer relative gap-2 flex justify-center items-center rounded-md overflow-clip flex-shrink-0  text-gray-600 h-full w-full bg-amber-500 bg-cover bg-center"
     >
       <div className="div-overlayer absolute top-0 left-0 w-full h-full bg-black/50"></div>
       <p className="block text-gray-200 font-medium z-10 text-[14px] text-center">
@@ -26,6 +38,7 @@ const Categoria = ({
     </a>
   );
 };
+
 
 export const SecCategorias = () => {
   return (
@@ -37,28 +50,28 @@ export const SecCategorias = () => {
       <SwiperSlide className='aspect-[2.39/1]'>
         <Categoria
           categoria="Churrascos"
-          href="#churrascos"
+          href="churrascos"
           img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXIDNvdmZITZtlAgTddYGBBgbetira9hCG-g&s"
         />
       </SwiperSlide>
       <SwiperSlide className='aspect-[2.39/1]'>
         <Categoria
           categoria="Espetos"
-          href="#espetos"
+          href="espetos"
           img="https://www.qdeliciaespeto.com.br/loja/wp-content/uploads/2016/06/frango.jpg"
         />
       </SwiperSlide>
       <SwiperSlide className='aspect-[2.39/1]'>
         <Categoria
           categoria="Bebidas"
-          href="#bebidas"
+          href="bebidas"
           img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIdXJ1wuzIxz7FZnRI8uXcGgTHQv3LdiWluQ&s"
         />
       </SwiperSlide>
       <SwiperSlide className='aspect-[2.39/1]'>
         <Categoria
           categoria="Batatas Fritas"
-          href="#batatas-fritas"
+          href="batatas-fritas"
           img="https://www.pintoburguer.com.br/wp-content/uploads/2021/09/fritas-1.jpg"
         />
       </SwiperSlide>
