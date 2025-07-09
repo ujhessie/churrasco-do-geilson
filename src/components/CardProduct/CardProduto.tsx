@@ -70,8 +70,8 @@ export const CardProduto = ({
   };
 
   return tipo === "primario" ? (
-    <div className="card-produto shadow rounded-md overflow-clip flex gap-2 p-2 min-h-[100px]">
-      <div className="div-img-produto max-w-[30%] w-full rounded-md">
+    <div className="card-produto shadow rounded-md overflow-clip flex gap-2 p-2 min-h-[100px] border-gray-50 border-1 border-solid">
+      <div className="div-img-produto max-w-[30%] w-full rounded-md overflow-clip">
         <Img />
       </div>
 
