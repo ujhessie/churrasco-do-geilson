@@ -1,11 +1,13 @@
 const Categoria = ({
   categoria,
   href,
+  tipo = "primario",
 }: {
   categoria: string;
   href: string;
+  tipo?: "primario" | "secundario";
 }) => {
-  return (
+  return tipo === "primario" ? (
     <a
       href={href}
       className="tag relative gap-2 flex justify-center  items-center  rounded-xl overflow-clip flex-shrink-0 w-[40%] text-gray-600  aspect-[21/9] bg-amber-500 p-4 bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVcIhglanMSJ4RxCCYcW_a8_aKlGMw2iQ9vw&s')] bg-cover bg-center"
@@ -15,6 +17,12 @@ const Categoria = ({
         {categoria}
       </p>
     </a>
+  ) : (
+    <>
+    
+
+
+    </>
   );
 };
 
@@ -26,10 +34,10 @@ export const SecCategorias = () => {
           Categorias
         </h2>
         <div className="tags-categorias flex gap-2 w-full   overflow-x-auto">
-          <Categoria categoria="Churrascos" href="#churrascos" />
-          <Categoria categoria="Espetos" href="#espetos" />
-          <Categoria categoria="Bebidas" href="#bebidas" />
-          <Categoria categoria="Batatas Fritas" href="#batatas-fritas" />
+          <Categoria categoria="Churrascos" href="#churrascos" tipo="secundario" />
+          <Categoria categoria="Espetos" href="#espetos" tipo="secundario" />
+          <Categoria categoria="Bebidas" href="#bebidas" tipo="secundario" />
+          <Categoria categoria="Batatas Fritas" href="#batatas-fritas" tipo="secundario" />
         </div>
       </div>
     </>
