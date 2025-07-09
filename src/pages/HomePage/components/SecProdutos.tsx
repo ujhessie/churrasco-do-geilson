@@ -30,7 +30,7 @@ export const SecProdutos = () => {
         if (produtosDaCategoria.length === 0) return null;
 
         return (
-          <section className="mb-8 " key={categoria.id}>
+          <section className="mb-8 " key={categoria.id} id={categoria.id}>
             <h2 className=" bg-white py-2 w-full px-4 z-10">
               {categoria.nome}
             </h2>
