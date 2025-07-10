@@ -16,7 +16,7 @@ const Categoria = ({
     const id = href.replace('/#', ''); // tira o "/#" e fica só com o id
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -100; // define o quanto acima do elemento você quer parar (ex: -100px)
+      const yOffset = -20; // define o quanto acima do elemento você quer parar (ex: -100px)
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({ top: y, behavior: 'smooth' });
