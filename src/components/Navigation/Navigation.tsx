@@ -1,23 +1,40 @@
 import { CircleUser, House, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Navigation = () => {
-  const [active, setActive] = useState("home");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Atualiza o estado com base na rota atual
+  const [active, setActive] = useState(() => {
+    if (location.pathname === "/") return "inicio";
+    if (location.pathname === "/carrinho") return "carrinho";
+    if (location.pathname === "/minha-conta") return "minha-conta";
+    return "";
+  });
 
   const NavItem = ({
     icon: Icon,
     label,
     value,
+    path,
   }: {
     icon: React.ElementType;
     label: string;
     value: string;
+    path: string;
   }) => {
     const isActive = active === value;
 
+    const handleClick = () => {
+      setActive(value);
+      navigate(path);
+    };
+
     return (
       <button
-        onClick={() => setActive(value)}
+        onClick={handleClick}
         className={`rounded-full px-4 py-3 flex items-center gap-2 cursor-pointer transition-all duration-300 ease-in-out
           ${isActive ? "bg-orange-500" : ""}`}
       >
@@ -37,11 +54,11 @@ export const Navigation = () => {
   };
 
   return (
-    <div className="px-2 -mb-1 sticky left-0 bottom-0  z-10 w-full bg-gray-800">
-      <div className="px-4 py-2 w-fulld  shadow-2xs rounded-full flex justify-between gap-4 mx-auto ">
-        <NavItem icon={House} label="Início" value="home" />
-        <NavItem icon={ShoppingCart} label="Carrinho" value="cart" />
-        <NavItem icon={CircleUser} label="Minha Conta" value="account" />
+    <div className="px-2 fixed left-0 bottom-0 z-10 w-full bg-gray-800">
+      <div className="px-4 py-2 w-full shadow-2xs rounded-full flex justify-between gap-4 mx-auto">
+        <NavItem icon={House} label="Início" value="inicio" path="/" />
+        <NavItem icon={ShoppingCart} label="Carrinho" value="carrinho" path="/carrinho" />
+        <NavItem icon={CircleUser} label="Minha Conta" value="minha-conta" path="/minha-conta" />
       </div>
     </div>
   );
