@@ -1,23 +1,40 @@
-import { createContext } from "react";
-import { produtos, type IProduto } from "../Data/Produtos";
+import { createContext, useState, useEffect } from "react";
+import type { IProduto } from "../Data/Produtos";
 
-// 1. Define a interface do contexto
+
+// Tipo do contexto
 interface ProdutosContextData {
   produtos: IProduto[];
 }
 
-// 2. Cria o contexto
+// Criar o contexto
 export const ProdutosContext = createContext<ProdutosContextData>(
   {} as ProdutosContextData
 );
 
-// 3. Define as props do Provider
+// Tipo das props do Provider
 interface ProdutosProviderProps {
-  children: React.ReactNode; // ReactNode permite colocar JSX como filhos
+  children: React.ReactNode;
 }
 
-// 4. Cria o Provider
+// Criar o Provider
 export const ProdutosProvider = ({ children }: ProdutosProviderProps) => {
+  const [produtos, setProdutos] = useState<IProduto[]>([]);
+
+  useEffect(() => {
+    async function buscarProdutos() {
+      try {
+        const resposta = await fetch("/data/data_api.json");
+        const dados = await resposta.json();
+        setProdutos(dados.produtos);
+      } catch (erro) {
+        console.error("Erro ao buscar produtos:", erro);
+      }
+    }
+
+    buscarProdutos();
+  }, []);
+
   return (
     <ProdutosContext.Provider value={{ produtos }}>
       {children}
