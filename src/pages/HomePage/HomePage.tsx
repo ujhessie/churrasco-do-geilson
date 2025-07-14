@@ -8,7 +8,7 @@ import { Header } from "../../components/Header/Header";
 export const HomePage = () => {
   return (
     <AnimatedPageLoad>
-      <div className=" scroll-smooth max-w-[1400px] mx-auto">
+      <div className=" scroll-smooth max-w-[1400px] mx-auto pt-[70px]">
         <Header/>
         <SecBanner />
         <SecCategorias />

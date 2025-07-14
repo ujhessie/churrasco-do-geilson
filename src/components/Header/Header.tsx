@@ -10,11 +10,11 @@ export const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      if (currentScrollY > lastScrollY && currentScrollY > 10) {
-        // Rolando para baixo
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Rolando para baixo - esconde
         setIsVisible(false);
       } else if (currentScrollY < lastScrollY) {
-        // Rolando para cima
+        // Rolando para cima - mostra
         setIsVisible(true);
       }
       
@@ -29,8 +29,8 @@ export const Header = () => {
   }, [lastScrollY]);
 
   return (
-    <header className={`z-20 w-full shadow transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="p-2 py-4 flex justify-between items-center">
+    <header className={`fixed top-0 left-0 right-0 z-20 w-full shadow transition-transform duration-200 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className="p-2 py-4 flex justify-between items-center bg-white">
         <p className="text-gray-500 font-extrabold leading-[100%]">
           CHURRASCO <br /> DO GEILSON
         </p>
