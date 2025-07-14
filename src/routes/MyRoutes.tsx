@@ -4,6 +4,7 @@ import { CarrinhoPage } from "../pages/CarrinhoPage/CarrinhoPage";
 import { Navigation } from "../components/Navigation/Navigation";
 import { MinhaContaPage } from "../pages/MinhaContaPage/MinhaContaPage";
 
+
 export const MyRoutes = () => {
   return (
     <Router>
@@ -13,6 +14,7 @@ export const MyRoutes = () => {
         <Route path="/minha-conta" element= {<MinhaContaPage/>}/>
         <Route path="*" element={<HomePage />} />
       </Routes>
+        
         <Navigation />
     </Router>
   );
