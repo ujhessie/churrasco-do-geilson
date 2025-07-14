@@ -1,6 +1,5 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css'; // Importa o estilo base
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css"; // Importa o estilo base
 
 const Categoria = ({
   categoria,
@@ -13,13 +12,14 @@ const Categoria = ({
 }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault(); // impede o comportamento padrão do link
-    const id = href.replace('/#', ''); // tira o "/#" e fica só com o id
+    const id = href.replace("/#", ""); // tira o "/#" e fica só com o id
     const element = document.getElementById(id);
     if (element) {
       const yOffset = -30; // define o quanto acima do elemento você quer parar (ex: -100px)
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
@@ -39,42 +39,40 @@ const Categoria = ({
   );
 };
 
-
 export const SecCategorias = () => {
   return (
-    <Swiper
-      spaceBetween={8}
-      slidesPerView={3.3}
-      className="w-full"
-    >
-      <SwiperSlide className='aspect-[2.39/1]'>
-        <Categoria
-          categoria="Churrascos"
-          href="churrascos"
-          img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXIDNvdmZITZtlAgTddYGBBgbetira9hCG-g&s"
-        />
-      </SwiperSlide>
-      <SwiperSlide className='aspect-[2.39/1]'>
-        <Categoria
-          categoria="Espetos"
-          href="espetos"
-          img="https://www.qdeliciaespeto.com.br/loja/wp-content/uploads/2016/06/frango.jpg"
-        />
-      </SwiperSlide>
-      <SwiperSlide className='aspect-[2.39/1]'>
-        <Categoria
-          categoria="Bebidas"
-          href="bebidas"
-          img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIdXJ1wuzIxz7FZnRI8uXcGgTHQv3LdiWluQ&s"
-        />
-      </SwiperSlide>
-      <SwiperSlide className='aspect-[2.39/1]'>
-        <Categoria
-          categoria="Batatas Fritas"
-          href="batatas-fritas"
-          img="https://www.pintoburguer.com.br/wp-content/uploads/2021/09/fritas-1.jpg"
-        />
-      </SwiperSlide>
-    </Swiper>
+    <div className="px-2">
+
+      <Swiper spaceBetween={8} slidesPerView={3.3} className=" ">
+        <SwiperSlide className="aspect-[2.39/1]">
+          <Categoria
+            categoria="Churrascos"
+            href="churrascos"
+            img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXIDNvdmZITZtlAgTddYGBBgbetira9hCG-g&s"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="aspect-[2.39/1]">
+          <Categoria
+            categoria="Espetos"
+            href="espetos"
+            img="https://www.qdeliciaespeto.com.br/loja/wp-content/uploads/2016/06/frango.jpg"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="aspect-[2.39/1]">
+          <Categoria
+            categoria="Bebidas"
+            href="bebidas"
+            img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIdXJ1wuzIxz7FZnRI8uXcGgTHQv3LdiWluQ&s"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="aspect-[2.39/1]">
+          <Categoria
+            categoria="Batatas Fritas"
+            href="batatas-fritas"
+            img="https://www.pintoburguer.com.br/wp-content/uploads/2021/09/fritas-1.jpg"
+          />
+        </SwiperSlide>
+      </Swiper>
+    </div>
   );
 };

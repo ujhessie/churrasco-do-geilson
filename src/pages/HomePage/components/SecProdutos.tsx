@@ -30,7 +30,7 @@ export const SecProdutos = () => {
         if (produtosDaCategoria.length === 0) return null;
 
         return (
-          <section className="pt-10 " key={categoria.id} id={categoria.id}>
+          <section className="pt-8 " key={categoria.id} id={categoria.id}>
             <h2 className=" bg-white  w-full px-4 z-10" >
               {categoria.nome}
             </h2>
