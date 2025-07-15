@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import type { IProduto } from "../Data/Produtos";
+import type { IProduto } from "../Data/Produto";
+
 
 
 // Tipo do contexto
