@@ -1,9 +1,12 @@
+import { CarrinhoProvider } from "./CartContext";
 import { ProdutosProvider } from "./ProductsContext";
 
 export const Contexts = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <ProdutosProvider>{children}</ProdutosProvider>
+      <CarrinhoProvider>
+        <ProdutosProvider>{children}</ProdutosProvider>
+      </CarrinhoProvider>
     </>
   );
 };

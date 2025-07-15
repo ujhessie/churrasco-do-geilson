@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { ProdutosContext } from "../../Contexts/ProductsContext";
 import { FaWhatsapp, FaTimes } from "react-icons/fa";
+import { useCarrinho } from "../../Contexts/CartContext";
+import { Notification } from "../Notification/Notification"; // Importe o novo componente
 
 type CardProdutoProps = {
   id: number;
@@ -8,7 +10,9 @@ type CardProdutoProps = {
 };
 
 export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
+  const { adicionarAoCarrinho } = useCarrinho();
   const [modalAberto, setModalAberto] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const { produtos } = useContext(ProdutosContext);
   const produto = produtos.find((p) => p.id === id);
 
@@ -18,10 +22,21 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
 
   const { nome, imgUrl, descricao, valor } = produto;
 
-  // Função para alternar o modal
+  const handleAdicionarAoCarrinho = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    adicionarAoCarrinho({
+      id,
+      nome,
+      imgUrl,
+      valor: valor || 0,
+    });
+    setModalAberto(false); // Fecha o modal
+    setShowNotification(true); // Mostra a notificação
+  };
+
   const toggleModal = () => setModalAberto(!modalAberto);
 
-  // Subcomponentes internos
+  // Subcomponentes internos (mantidos iguais)
   const Imagem = () => (
     <img
       className="w-full h-full object-cover"
@@ -50,8 +65,11 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
   );
 
   const BotaoPedido = () => (
-    <button className="group flex items-center gap-2 p-1 font-medium text-orange-400 hover:bg-orange-500 bg-orange-100 hover:text-white rounded-full transition">
-      <span className="ml-2 text-sm">Pedir Agora</span>
+    <button 
+      className="group flex items-center gap-2 p-1 font-medium text-orange-400 hover:bg-orange-500 bg-orange-100 hover:text-white rounded-full transition"
+      onClick={handleAdicionarAoCarrinho}
+    >
+      <span className="ml-2 text-sm">Adicionar</span>
       <FaWhatsapp className="w-4 h-4 transition-opacity opacity-80 group-hover:opacity-100" />
     </button>
   );
@@ -61,9 +79,8 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
       ? "shadow rounded-md overflow-clip flex gap-2 p-2 min-h-[100px] border border-gray-50 cursor-pointer hover:shadow-md transition-shadow"
       : "shadow flex flex-col rounded-xl p-4 overflow-clip relative h-full cursor-pointer hover:shadow-md transition-shadow";
 
-  // Componente do Modal
   const ModalProduto = () => (
-    <div className="fixed inset-0 bg-black/80  flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-md max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-start mb-4">
@@ -77,20 +94,13 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+            <div className="aspect-square bg-gray-100 rounded-md overflow-hidden">
               <Imagem />
             </div>
             
             <div>
               <Valor className="text-xl mb-4" />
               <Descricao className="mb-6" />
-              
-              {/* {detalhes && (
-                <div className="mb-6">
-                  <h5 className="font-bold text-gray-700 mb-2">Detalhes:</h5>
-                  <p className="text-gray-600">{detalhes}</p>
-                </div>
-              )} */}
               
               <div className="flex justify-between items-center">
                 <BotaoPedido />
@@ -135,12 +145,24 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
 
           <div className="flex justify-between items-center">
             <Valor />
-            <BotaoPedido />
+            <button 
+              className="group flex items-center gap-2 p-1 font-medium text-orange-400 hover:bg-orange-500 bg-orange-100 hover:text-white rounded-full transition"
+              onClick={handleAdicionarAoCarrinho}
+            >
+              <span className="ml-2 text-sm">Adicionar</span>
+              <FaWhatsapp className="w-4 h-4 transition-opacity opacity-80 group-hover:opacity-100" />
+            </button>
           </div>
         </div>
       </div>
 
       {modalAberto && <ModalProduto />}
+      {showNotification && (
+        <Notification 
+          message="Produto adicionado ao carrinho!" 
+          onClose={() => setShowNotification(false)}
+        />
+      )}
     </>
   );
 };
