@@ -16,7 +16,7 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
     return <p className="text-gray-500">Produto não encontrado</p>;
   }
 
-  const { nome, imgUrl, descricao, valor, detalhes } = produto;
+  const { nome, imgUrl, descricao, valor } = produto;
 
   // Função para alternar o modal
   const toggleModal = () => setModalAberto(!modalAberto);
@@ -85,12 +85,12 @@ export const CardProduto = ({ id, tipo = "primario" }: CardProdutoProps) => {
               <Valor className="text-xl mb-4" />
               <Descricao className="mb-6" />
               
-              {detalhes && (
+              {/* {detalhes && (
                 <div className="mb-6">
                   <h5 className="font-bold text-gray-700 mb-2">Detalhes:</h5>
                   <p className="text-gray-600">{detalhes}</p>
                 </div>
-              )}
+              )} */}
               
               <div className="flex justify-between items-center">
                 <BotaoPedido />
