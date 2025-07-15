@@ -3,6 +3,9 @@ import { useCarrinho } from "../../Contexts/CartContext";
 
 
 export const Carrinho = () => {
+
+
+
   const {
     itens,
     removerDoCarrinho,
